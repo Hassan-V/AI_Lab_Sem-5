@@ -1,15 +1,26 @@
+from typing import Any
+
 import numpy as np
+import pandas as pd
 
 
 class CustomNaiveBayes:
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.class_prob = {}
         self.class_feature_prob = {}
         self.classes = []
         self.features = []
 
-    def fit(self, X, y, alpha=1):
+        """
+        Initialize the CustomKNN with a dataset, target attribute, and value of k (number of neighbors).
+
+        :param dataset: DataFrame containing feature data.
+        :param target_attr: Series containing the target attribute (labels).
+        :param k: Number of nearest neighbors to consider for classification.
+        """
+
+    def fit(self, X: pd.DataFrame, y: pd.Series, alpha=1) -> None:
         self.classes = np.unique(y)
         self.features = X.columns
 
@@ -29,7 +40,7 @@ class CustomNaiveBayes:
                 unseen_prob = alpha / total_count
                 self.class_feature_prob[c][f]["unseen"] = unseen_prob
 
-    def predict(self, X):
+    def predict(self, X: pd.Series) -> Any:
         y_pred = []
         for i in range(len(X)):
             max_log_prob = -np.inf

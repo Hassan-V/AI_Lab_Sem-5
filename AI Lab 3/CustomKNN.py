@@ -40,10 +40,6 @@ class CustomKNN:
             distances.sort(key=lambda x: x[0])
             k_nearest_labels = [label for _, label in distances[:self.k]]
 
-            print("Test sample:", test_sample.values)  # Debug: test sample values
-            print("Distances:", distances[:self.k])  # Debug: top k distances
-            print("Nearest labels:", k_nearest_labels)  # Debug: nearest labels
-
             most_common = Counter(k_nearest_labels).most_common(1)
             predictions.append(most_common[0][0])
 
